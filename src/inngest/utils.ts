@@ -1,4 +1,6 @@
 import { Sandbox } from "@e2b/code-interpreter";
+import { AgentResult } from "@inngest/agent-kit";
+import type { TextMessage } from "@inngest/agent-kit";
 
 /**
  * Connects to a sandbox environment by ID
@@ -21,4 +23,20 @@ export const getSandbox = async (sandboxId: string): Promise<Sandbox> => {
       }`
     );
   }
+};
+
+export const lastAssistantTextMessageContent = (result: AgentResult) => {
+  const lastAssistantTextMessageIndex = result.output.findLastIndex(
+    (message) => message.role === "assistant"
+  );
+
+  const message = result.output[lastAssistantTextMessageIndex] as
+    | TextMessage
+    | undefined;
+
+  return message?.content
+    ? typeof message.content === "string"
+      ? message.content
+      : message.content.map((content) => content.text).join("")
+    : undefined;
 };
