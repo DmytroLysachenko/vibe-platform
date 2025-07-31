@@ -62,7 +62,9 @@ const MessagesContainer = ({
               type={message.type}
             />
           ))}
+
           {isLastMessageUser && <MessageLoading />}
+
           <div ref={bottomRef} />
         </div>
       </div>

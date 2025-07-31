@@ -49,7 +49,9 @@ const ProjectHeader = ({ projectId }: Props) => {
               height={24}
               alt={"Vibe"}
             />
+
             <span className="text-sm font-medium">{project.name}</span>
+
             <ChevronDownIcon />
           </Button>
         </DropdownMenuTrigger>
@@ -62,9 +64,11 @@ const ProjectHeader = ({ projectId }: Props) => {
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
+
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="gap-2">
               <SunMoonIcon className="size-4 text-muted-foreground" />
+
               <span>Appearance</span>
             </DropdownMenuSubTrigger>
 
@@ -77,9 +81,11 @@ const ProjectHeader = ({ projectId }: Props) => {
                   <DropdownMenuRadioItem value="light">
                     <span>Light</span>
                   </DropdownMenuRadioItem>
+
                   <DropdownMenuRadioItem value="dark">
                     <span>Dark</span>
                   </DropdownMenuRadioItem>
+
                   <DropdownMenuRadioItem value="system">
                     <span>System</span>
                   </DropdownMenuRadioItem>
