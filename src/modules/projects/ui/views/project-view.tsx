@@ -47,7 +47,7 @@ const ProjectView = ({ projectId }: Props) => {
           </Suspense>
         </ResizablePanel>
 
-        <ResizableHandle withHandle />
+        <ResizableHandle className="hover:bg-primary transition-colors" />
 
         <ResizablePanel
           defaultSize={65}
@@ -65,8 +65,10 @@ const ProjectView = ({ projectId }: Props) => {
                   value="preview"
                   className="rounded-md"
                 >
-                  <EyeIcon /> <span>Demo</span>
+                  <EyeIcon />
+                  <span>Demo</span>
                 </TabsTrigger>
+
                 <TabsTrigger
                   value="code"
                   className="rounded-md"

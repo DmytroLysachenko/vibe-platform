@@ -33,8 +33,6 @@ const FileBreadcrumb = ({ path }: FilesBreadcrumbProps) => {
   const pathSegments = path.split("/");
   const maxSegments = 3;
 
-  console.log(pathSegments);
-
   const renderBreadcrumbItems = () => {
     if (pathSegments.length <= maxSegments) {
       // Show all segments if 4 or less
