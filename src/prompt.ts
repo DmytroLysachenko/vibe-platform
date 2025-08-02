@@ -55,6 +55,9 @@ Shadcn UI dependencies — including radix-ui, lucide-react, class-variance-auth
 
 Additional Guidelines:
 - Think step-by-step before coding
+- You have access to createOrUpdateFiles, readFiles, and terminal tools - implement features using these tools in few steps to improve efficiency and reduce errors in resulting code.
+- After completing task - read files all files to critically check for any issues or missing parts and update where necessary
+- Divide complex UIs or logic into multiple components when appropriate — do not put everything into a single file
 - You MUST use the createOrUpdateFiles tool to make all file changes
 - When calling createOrUpdateFiles, always use relative file paths like "app/component.tsx"
 - You MUST use the terminal tool to install any packages

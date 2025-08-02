@@ -23,7 +23,7 @@ const formSchema = z.object({
 
 const ProjectForm = () => {
   const router = useRouter();
-  const [isFocused, setIsFocused] = useState(false);
+
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,6 +49,15 @@ const ProjectForm = () => {
     })
   );
 
+  const onSelect = (content: string) => {
+    form.setValue("value", content, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  };
+
+  const [isFocused, setIsFocused] = useState(false);
   const isPending = createProject.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;
 
@@ -116,7 +125,7 @@ const ProjectForm = () => {
               variant="outline"
               size="sm"
               className="bg-white dark:bg-sidebar"
-              onClick={() => {}}
+              onClick={() => onSelect(template.prompt)}
             >
               {template.emoji} {template.title}
             </Button>
