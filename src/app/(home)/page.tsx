@@ -4,24 +4,9 @@ import React from "react";
 
 import Image from "next/image";
 import ProjectForm from "@/modules/home/ui/components/project-form";
+import ProjectList from "@/modules/home/ui/components/project-list";
 
 const Home = () => {
-  // const router = useRouter();
-  // const [value, setValue] = React.useState("");
-  // const trpc = useTRPC();
-
-  // const createProject = useMutation(
-  //   trpc.projects.create.mutationOptions({
-  //     onSuccess: (data) => {
-  //       toast.success("Message created");
-  //       router.push(`/projects/${data.id}`);
-  //     },
-  //     onError: (error) => {
-  //       toast.error("Something went wrong: " + error.message);
-  //     },
-  //   })
-  // );
-
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full">
       <section className="space-y-6 py-[16vh] 2xl:py-48">
@@ -44,6 +29,7 @@ const Home = () => {
           <ProjectForm />
         </div>
       </section>
+      <ProjectList />
     </div>
   );
 };
