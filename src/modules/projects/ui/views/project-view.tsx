@@ -80,7 +80,7 @@ const ProjectView = ({ projectId }: Props) => {
                 <Button
                   asChild
                   size="sm"
-                  variant="default"
+                  variant="tertiary"
                 >
                   <Link href="/pricing">
                     <CrownIcon /> Upgrade
