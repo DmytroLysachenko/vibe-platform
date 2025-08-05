@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useClerk } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
@@ -31,6 +32,7 @@ const ProjectForm = () => {
       value: "",
     },
   });
+  const clerk = useClerk();
 
   const onSubmit = async ({ value }: z.infer<typeof formSchema>) => {
     await createProject.mutateAsync({ value });
@@ -44,6 +46,8 @@ const ProjectForm = () => {
         router.push(`/projects/${data.id}`);
       },
       onError: (error) => {
+        if (error.data?.code === "UNAUTHORIZED") clerk.openSignIn();
+
         toast.error(error.message);
       },
     })

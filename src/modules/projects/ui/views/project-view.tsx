@@ -17,6 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Fragment } from "@/generated/prisma";
 import FileExplorer from "@/components/file-explorer";
+import UserControl from "@/components/user-control";
 
 interface Props {
   projectId: string;
@@ -86,6 +87,7 @@ const ProjectView = ({ projectId }: Props) => {
                     <CrownIcon /> Upgrade
                   </Link>
                 </Button>
+                <UserControl />
               </div>
             </div>
 
