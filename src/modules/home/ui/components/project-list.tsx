@@ -20,13 +20,7 @@ const ProjectList = () => {
         {user?.firstName}&apos;s Saved projects
       </h2>
 
-      {!Boolean(projects?.length) && (
-        <p className="text-muted-foreground text-sm text-center">
-          No projects found.
-        </p>
-      )}
-
-      {Boolean(projects?.length) && (
+      {Boolean(projects?.length) ? (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {projects?.map((project) => (
             <Button
@@ -59,6 +53,10 @@ const ProjectList = () => {
             </Button>
           ))}
         </div>
+      ) : (
+        <p className="text-muted-foreground text-sm text-center">
+          No projects found.
+        </p>
       )}
     </div>
   );

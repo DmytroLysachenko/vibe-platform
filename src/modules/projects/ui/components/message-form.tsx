@@ -5,12 +5,13 @@ import z from "zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
+import Usage from "./usage";
 
 interface Props {
   projectId: string;
@@ -52,12 +53,20 @@ const MessageForm = ({ projectId }: Props) => {
     })
   );
 
+  const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+
   const isPending = createMessage.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;
-  const showUsage = false;
-
+  const showUsage = true;
+  //TODO: Fix bug with getting undefined from status
   return (
     <Form {...form}>
+      {showUsage && (
+        <Usage
+          points={usage.remainingPoints}
+          msBeforeNext={usage.msBeforeNext}
+        />
+      )}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
@@ -89,6 +98,7 @@ const MessageForm = ({ projectId }: Props) => {
             />
           )}
         />
+
         <div className="flex gap-2 items-end justify-between pt-2">
           <div className="text-[10px] text-muted-foreground font-mono">
             <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium dark:bg-muted-foreground dark:text-muted">
