@@ -1,9 +1,10 @@
-import { inngest } from "@/inngest/client";
-import prisma from "@/lib/db";
-import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
 import z from "zod";
 import { generateSlug } from "random-word-slugs";
 import { TRPCError } from "@trpc/server";
+
+import { inngest } from "@/inngest/client";
+import prisma from "@/lib/db";
+import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
 
 export const projectsRouter = createTRPCRouter({
   getMany: protectedProcedure.query(async ({ ctx }) => {

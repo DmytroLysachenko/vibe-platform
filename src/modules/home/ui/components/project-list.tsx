@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { useTRPC } from "@/trpc/client";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+import { Button } from "@/components/ui/button";
+import { useTRPC } from "@/trpc/client";
 
 const ProjectList = () => {
   const trpc = useTRPC();

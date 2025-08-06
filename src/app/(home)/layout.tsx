@@ -1,5 +1,6 @@
-import Navbar from "@/modules/home/ui/components/navbar";
 import React, { PropsWithChildren } from "react";
+
+import Navbar from "@/modules/home/ui/components/navbar";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (

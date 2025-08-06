@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-
 import Image from "next/image";
+
 import ProjectForm from "@/modules/home/ui/components/project-form";
 import ProjectList from "@/modules/home/ui/components/project-list";
 
