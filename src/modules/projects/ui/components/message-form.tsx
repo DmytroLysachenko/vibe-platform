@@ -12,6 +12,7 @@ import { useTRPC } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import Usage from "./usage";
+import { useRouter } from "next/navigation";
 
 interface Props {
   projectId: string;
@@ -27,6 +28,7 @@ const formSchema = z.object({
 const MessageForm = ({ projectId }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const queryClient = useQueryClient();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,9 +48,12 @@ const MessageForm = ({ projectId }: Props) => {
         queryClient.invalidateQueries(
           trpc.messages.getMany.queryOptions({ projectId })
         );
+        queryClient.invalidateQueries(trpc.usage.status.queryOptions());
       },
       onError: (error) => {
         toast.error(error.message);
+
+        if (error.data?.code === "TOO_MANY_REQUESTS") router.push("/pricing");
       },
     })
   );
@@ -57,8 +62,8 @@ const MessageForm = ({ projectId }: Props) => {
 
   const isPending = createMessage.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;
-  const showUsage = true;
-  //TODO: Fix bug with getting undefined from status
+  const showUsage = !!usage;
+
   return (
     <Form {...form}>
       {showUsage && (
