@@ -12,12 +12,6 @@ export const PROJECT_TEMPLATES = [
       "Create an admin dashboard with a sidebar, stat cards, a chart placeholder, and a basic table with filter and pagination using local state. Use clear visual grouping and balance in your design for a modern, professional look.",
   },
   {
-    emoji: "📋",
-    title: "Build a kanban board",
-    prompt:
-      "Build a kanban board with drag-and-drop using and support for adding and removing tasks with local state. Use consistent spacing, column widths, and hover effects for a polished UI.",
-  },
-  {
     emoji: "🗂️",
     title: "Build a file manager",
     prompt:
