@@ -1,4 +1,6 @@
 import React, { Fragment, useCallback, useMemo, useState } from "react";
+import { CopyCheckIcon, CopyIcon } from "lucide-react";
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -6,7 +8,6 @@ import {
 } from "./ui/resizable";
 import { Hint } from "./ui/hint";
 import { Button } from "./ui/button";
-import { CopyCheckIcon, CopyIcon } from "lucide-react";
 import CodeView from "./ui/code-view";
 import { convertFilesToTreeItems } from "@/lib/utils";
 import TreeView from "./tree-view";

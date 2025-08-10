@@ -5,6 +5,7 @@ import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { ErrorBoundary } from "react-error-boundary";
+
 import {
   ResizableHandle,
   ResizablePanel,
