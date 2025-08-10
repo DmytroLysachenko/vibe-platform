@@ -13,7 +13,11 @@ import { z } from "zod";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/prompt";
 import prisma from "@/lib/db";
 import { inngest } from "./client";
-import { getSandbox, lastAssistantTextMessageContent, isFilesMap } from "./utils";
+import {
+  getSandbox,
+  lastAssistantTextMessageContent,
+  isFilesMap,
+} from "./utils";
 
 interface AgentState {
   summary: string;
@@ -26,6 +30,7 @@ export const codeAgentFunction = inngest.createFunction(
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("6r2jgzswf42j0eavwk0n");
+      await sandbox.setTimeout(60_000 * 10);
       return sandbox.sandboxId;
     });
 
@@ -41,6 +46,7 @@ export const codeAgentFunction = inngest.createFunction(
           orderBy: {
             createdAt: "desc",
           },
+          take: 6,
         });
 
         for (const message of messages) {
@@ -53,7 +59,7 @@ export const codeAgentFunction = inngest.createFunction(
           });
         }
 
-        return formattedMessages;
+        return formattedMessages.reverse();
       }
     );
 
@@ -72,32 +78,29 @@ export const codeAgentFunction = inngest.createFunction(
         return {};
       }
 
-      const frag= await prisma.fragment.findFirst({
+      const frag = await prisma.fragment.findFirst({
         where: {
           messageId: messages.id,
         },
-          select: { files: true },
+        select: { files: true },
       });
 
-        if (!frag || frag.files == null) return {};
+      if (!frag || frag.files == null) return {};
 
+      const files = frag.files;
+      if (typeof files === "string") {
+        try {
+          const parsed = JSON.parse(files);
+          return isFilesMap(parsed) ? parsed : {};
+        } catch {
+          return {};
+        }
+      }
 
-  const files = frag.files
- if (typeof files === "string") {
-    try {
-      const parsed = JSON.parse(files);
-      return isFilesMap(parsed) ? parsed : {};
-    } catch {
+      // If stored as JSON/JSONB, it's already parsed
+      if (isFilesMap(files)) return files;
+
       return {};
-    }
-  }
-
-  // If stored as JSON/JSONB, it's already parsed
-  if (isFilesMap(files)) return files;
-
-  return {};
-
-
     });
 
     const state = createState<AgentState>(

@@ -17,6 +17,8 @@ export const getSandbox = async (sandboxId: string): Promise<Sandbox> => {
 
   try {
     const sandbox = await Sandbox.connect(sandboxId);
+
+    await sandbox.setTimeout(60_000 * 10);
     return sandbox;
   } catch (error) {
     throw new Error(
@@ -43,8 +45,13 @@ export const lastAssistantTextMessageContent = (result: AgentResult) => {
     : undefined;
 };
 
-
- export function isFilesMap(v: unknown): v is FilesMap {
-  return !!v && typeof v === "object" && !Array.isArray(v) &&
-    Object.values(v as Record<string, unknown>).every(val => typeof val === "string");
+export function isFilesMap(v: unknown): v is FilesMap {
+  return (
+    !!v &&
+    typeof v === "object" &&
+    !Array.isArray(v) &&
+    Object.values(v as Record<string, unknown>).every(
+      (val) => typeof val === "string"
+    )
+  );
 }
