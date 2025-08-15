@@ -206,21 +206,6 @@ Common commands:
 
 ---
 
-## .env checklist (quick copy)
-
-- [ ] `DATABASE_URL`
-- [ ] `NEXT_PUBLIC_APP_URL`
-- [ ] `OPENAI_API_KEY`
-- [ ] `E2B_API_KEY`
-- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-- [ ] `CLERK_SECRET_KEY`
-- [ ] `NEXT_PUBLIC_CLERK_SIGN_IN_URL`
-- [ ] `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
-- [ ] `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL`
-- [ ] `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL`
-
----
-
 ## Documentation Links
 
 Here are useful links for the main libraries and services used in this project:
