@@ -1,5 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ChevronDownIcon, ChevronLeftIcon, SunMoonIcon } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  SunMoonIcon,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTRPC } from "@/trpc/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   projectId: string;
@@ -100,4 +106,28 @@ const ProjectHeader = ({ projectId }: Props) => {
   );
 };
 
-export default ProjectHeader;
+const ProjectHeaderSkeleton = () => {
+  return (
+    <div className="w-full border-b bg-background">
+      <div className="mx-auto flex h-12 max-w-screen-2xl items-center gap-2 px-2 sm:h-14 sm:px-4">
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-6 w-6 rounded-md" />
+          <div className="hidden sm:flex items-center gap-2">
+            <Skeleton className="h-5 w-44" />
+            <ChevronDown className="h-4 w-4 opacity-40" />
+          </div>
+        </div>
+
+        <div className="flex-1" />
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Skeleton className="h-8 w-20 rounded-md" />
+          <Skeleton className="h-8 w-8 rounded-md" />
+          <Skeleton className="h-8 w-8 rounded-full" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export { ProjectHeader, ProjectHeaderSkeleton };

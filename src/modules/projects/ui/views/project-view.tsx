@@ -11,8 +11,14 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import MessagesContainer from "../components/messages-container";
-import ProjectHeader from "../components/project-header";
+import {
+  MessagesContainer,
+  MessagesContainerSkeleton,
+} from "../components/messages-container";
+import {
+  ProjectHeader,
+  ProjectHeaderSkeleton,
+} from "../components/project-header";
 import FragmentWeb from "../components/fragment-web";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -43,14 +49,14 @@ const ProjectView = ({ projectId }: Props) => {
           <ErrorBoundary
             fallback={<p>Error appeared during loading project header</p>}
           >
-            <Suspense fallback={<p>Loading Header...</p>}>
+            <Suspense fallback={<ProjectHeaderSkeleton />}>
               <ProjectHeader projectId={projectId} />
             </Suspense>
           </ErrorBoundary>
           <ErrorBoundary
             fallback={<p>Error appeared during loading Messages Container</p>}
           >
-            <Suspense fallback={<p>Loading Messages...</p>}>
+            <Suspense fallback={<MessagesContainerSkeleton />}>
               <MessagesContainer
                 projectId={projectId}
                 activeFragment={activeFragment}

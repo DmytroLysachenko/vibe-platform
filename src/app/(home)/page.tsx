@@ -5,8 +5,11 @@ import Image from "next/image";
 
 import ProjectForm from "@/modules/home/ui/components/project-form";
 import ProjectList from "@/modules/home/ui/components/project-list";
+import { useUser } from "@clerk/nextjs";
 
 const Home = () => {
+  const { user } = useUser();
+
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full">
       <section className="space-y-6 py-[16vh] 2xl:py-48">
@@ -29,7 +32,7 @@ const Home = () => {
           <ProjectForm />
         </div>
       </section>
-      <ProjectList />
+      {user && <ProjectList firstName={user.firstName} />}
     </div>
   );
 };

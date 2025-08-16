@@ -27,6 +27,7 @@ const isAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.auth.userId) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
+      message: "User is not authenticated",
     });
   }
 

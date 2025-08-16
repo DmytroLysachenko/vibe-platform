@@ -1,4 +1,3 @@
-import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
@@ -7,18 +6,19 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
+import { Loader } from "lucide-react";
 
-const ProjectList = () => {
+const ProjectList = ({ firstName }: { firstName: string | null }) => {
   const trpc = useTRPC();
-  const { user } = useUser();
-  const { data: projects } = useQuery(trpc.projects.getMany.queryOptions());
 
-  if (!user) return null;
+  const { data: projects, isLoading } = useQuery(
+    trpc.projects.getMany.queryOptions()
+  );
 
   return (
     <div className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex flex-col gap-y-6 sm:gap-y-4">
       <h2 className="text-2xl font-semibold">
-        {user?.firstName}&apos;s Saved projects
+        {firstName ?? "User"}&apos;s Saved projects
       </h2>
 
       {Boolean(projects?.length) ? (
@@ -53,6 +53,10 @@ const ProjectList = () => {
               </Link>
             </Button>
           ))}
+        </div>
+      ) : isLoading ? (
+        <div>
+          <Loader className="size-6 animate-spin" />
         </div>
       ) : (
         <p className="text-muted-foreground text-sm text-center">
