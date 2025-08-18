@@ -117,7 +117,7 @@ export const codeAgentFunction = inngest.createFunction(
       name: "code-agent",
       system: PROMPT,
       model: openai({
-        model: "gpt-5",
+        model: "gpt-4.1-2025-04-14",
       }),
       tools: [
         createTool({
