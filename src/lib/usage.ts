@@ -3,7 +3,7 @@ import prisma from "./db";
 import { auth } from "@clerk/nextjs/server";
 
 const FREE_POINTS = 2;
-const PRO_POINTS = 100;
+const PRO_POINTS = 5;
 const DURATION = 30 * 24 * 60 * 60; // 30 days in seconds
 const GENERATION_COST = 1;
 
@@ -36,7 +36,7 @@ export async function consumeCredits() {
 
 export async function getUsageStorage() {
   const { userId } = await auth();
-  console.log("userId", userId);
+
   if (!userId) {
     throw new Error("User is not authenticated");
   }
