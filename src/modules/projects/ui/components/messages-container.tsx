@@ -90,15 +90,15 @@ const MessagesContainer = ({
 
 const MessagesContainerSkeleton = () => {
   return (
-    <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-4 p-2 sm:p-4 lg:grid-cols-12">
+    <div className="mx-auto  w-full max-w-screen-xl gap-4 p-2 sm:p-4">
       {/* Left: conversation column */}
-      <div className="lg:col-span-7 xl:col-span-8 space-y-4">
+      <div className="lg:col-span-7 xl:col-span-8 space-y-4 w-full">
         {/* User prompt chip */}
         <Card className="shadow-sm">
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-3 w-full">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 opacity-40" />
-              <Skeleton className="h-4 w-40" />
+              <Skeleton className="h-4 w-20" />
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -114,7 +114,7 @@ const MessagesContainerSkeleton = () => {
             <div className="flex items-center gap-2">
               <Skeleton className="h-6 w-6 rounded-md" />
               <CardTitle className="text-base font-medium text-muted-foreground">
-                <Skeleton className="h-5 w-48" />
+                <Skeleton className="h-5 w-20" />
               </CardTitle>
             </div>
           </CardHeader>
@@ -160,45 +160,6 @@ const MessagesContainerSkeleton = () => {
               <span className="sr-only">Send</span>
             </Button>
           </div>
-        </div>
-      </div>
-
-      {/* Right: preview pane */}
-      <div className="lg:col-span-5 xl:col-span-4 space-y-4">
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              <Skeleton className="h-4 w-40" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="aspect-video w-full overflow-hidden rounded-xl border">
-              <Skeleton className="h-full w-full" />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <Skeleton className="h-8 w-full rounded-md" />
-              <Skeleton className="h-8 w-full rounded-md" />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Secondary card list */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
-          {[0, 1, 2].map((i) => (
-            <Card
-              key={i}
-              className="shadow-sm"
-            >
-              <CardContent className="flex items-center gap-3 p-4">
-                <Skeleton className="h-12 w-12 rounded-lg" />
-                <div className="flex-1 space-y-2">
-                  <Skeleton className="h-4 w-3/4" />
-                  <Skeleton className="h-3 w-1/2" />
-                </div>
-                <Skeleton className="h-8 w-16 rounded-md" />
-              </CardContent>
-            </Card>
-          ))}
         </div>
       </div>
     </div>
