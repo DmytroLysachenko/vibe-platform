@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
+import * as Sentry from "@sentry/nextjs";
 
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -20,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vibe-coding",
   description: "Generated your vibe-coding project",
+  other: {
+    ...Sentry.getTraceData(),
+  },
 };
 
 export default function RootLayout({

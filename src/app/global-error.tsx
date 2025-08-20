@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AlertTriangle, Home, Clipboard } from "lucide-react";
+import * as Sentry from "@sentry/nextjs";
 
 export default function ErrorBoundary({
   error,
@@ -13,6 +14,7 @@ export default function ErrorBoundary({
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    Sentry.captureException(error);
     console.error("App error boundary captured:", error);
   }, [error]);
 
