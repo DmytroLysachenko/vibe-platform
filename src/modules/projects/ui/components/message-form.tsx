@@ -36,10 +36,6 @@ const MessageForm = ({ projectId }: Props) => {
     },
   });
 
-  const onSubmit = async ({ value }: z.infer<typeof formSchema>) => {
-    await createMessage.mutateAsync({ value, projectId });
-  };
-
   const trpc = useTRPC();
   const createMessage = useMutation(
     trpc.messages.create.mutationOptions({
@@ -59,6 +55,10 @@ const MessageForm = ({ projectId }: Props) => {
   );
 
   const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+
+  const onSubmit = async ({ value }: z.infer<typeof formSchema>) => {
+    await createMessage.mutateAsync({ value, projectId });
+  };
 
   const isPending = createMessage.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;

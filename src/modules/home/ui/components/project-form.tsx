@@ -34,10 +34,6 @@ const ProjectForm = () => {
   });
   const clerk = useClerk();
 
-  const onSubmit = async ({ value }: z.infer<typeof formSchema>) => {
-    await createProject.mutateAsync({ value });
-  };
-
   const trpc = useTRPC();
   const createProject = useMutation(
     trpc.projects.create.mutationOptions({
@@ -54,6 +50,10 @@ const ProjectForm = () => {
       },
     })
   );
+
+  const onSubmit = async ({ value }: z.infer<typeof formSchema>) => {
+    await createProject.mutateAsync({ value });
+  };
 
   const onSelect = (content: string) => {
     form.setValue("value", content, {

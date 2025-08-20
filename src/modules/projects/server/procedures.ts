@@ -5,6 +5,7 @@ import { TRPCError } from "@trpc/server";
 import { inngest } from "@/inngest/client";
 import prisma from "@/lib/db";
 import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
+import { consumeCredits } from "@/lib/usage";
 
 export const projectsRouter = createTRPCRouter({
   getMany: protectedProcedure.query(async ({ ctx }) => {
@@ -64,6 +65,19 @@ export const projectsRouter = createTRPCRouter({
           },
         },
       });
+
+      try {
+        await consumeCredits();
+      } catch (error) {
+        if (error instanceof TRPCError) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: error.message });
+        } else {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "You have run out of credits",
+          });
+        }
+      }
 
       await inngest.send({
         name: "code-agent/run",
